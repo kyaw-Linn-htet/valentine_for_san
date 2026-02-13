@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.heart{
+    position:absolute;
+    pointer-events:none;
+    z-index:1;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+.container{
+    position:relative;
+    z-index:999;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    width:320px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.stickers{
+    margin:15px 0;
+}
+
+.buttons{
+    margin-top:20px;
+    position:relative;
+    height:140px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    position:absolute;
+    transition:0.2s;
+}
+
+#yes{
+    background:#ff4b5c;
+    color:white;
+    left:30px;
+    top:50px;
+}
+
+#no{
+    background:#ddd;
+    left:180px;
+    top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Can u be my valentine? 💖</h2>
+
+    <div class="stickers">
+        <img id="sticker" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDB1czdibHBkMjRteXNkNTZlMTEweGRmd3ZkajZuYmtucGhwMG9mZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vEcTsPwp2ilQz5bGQ8/giphy.gif" width="90">
+    </div>
+
+    <div class="buttons">
+        <button id="yes">Yes 😍</button>
+        <button id="no">No 😢</button>
+    </div>
+</div>
+
+<!-- ===== Background Music ===== -->
+<audio id="bgMusic" loop>
+    <!-- 🔥 GitHub mp3 raw link ထည့်ပါ -->
+    <source src="cats_sped_up.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const area = document.querySelector(".buttons");
+const sticker = document.getElementById("sticker");
+
+/* ===== Sticker Change ===== */
+const stickers=[
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmo1a2UzYmFsaHlycnJzMGZ0Z2JpYWFmb21pcHl1aWEweXBqdGVxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9PaZX8Np5vwJGrg4L0/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3M1cjJ5OTFrdjVudmVqMTZ6dWVvdzRnbmUydnZlYm1jZHIxMGtlciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/guhLpyPTCnDBK9dW8w/giphy.gif",
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDV3anl6dDZsazEzejRrc3BtMWIzdW4xeXZpOWEyaHpvamxvbDZnOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/YSDw0DDvMCLkn2c5DB/giphy.gif",
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDB1czdibHBkMjRteXNkNTZlMTEweGRmd3ZkajZuYmtucGhwMG9mZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vEcTsPwp2ilQz5bGQ8/giphy.gif"
+];
+
+let stickerIndex=0;
+setInterval(()=>{
+    stickerIndex=(stickerIndex+1)%stickers.length;
+    sticker.src=stickers[stickerIndex];
+},5000);
+
+/* ===== NO Button Runaway ===== */
+function moveButton(){
+    const maxX=area.clientWidth-noBtn.clientWidth;
+    const maxY=area.clientHeight-noBtn.clientHeight;
+
+    noBtn.style.left=Math.random()*maxX+"px";
+    noBtn.style.top=Math.random()*maxY+"px";
+}
+
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("touchstart",(e)=>{
+    e.preventDefault();
+    moveButton();
+});
+
+/* ===== YES Click Redirect ===== */
+yesBtn.addEventListener("click",()=>{
+    window.location.href="index.html";  // 🔥 Redirect
+});
+
+/* ===== Floating Hearts ===== */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},300);
+
+/* ===== Music Autoplay Fix ===== */
+const music=document.getElementById("bgMusic");
+
+window.addEventListener("load",()=>{
+    music.play().catch(()=>{
+        document.body.addEventListener("click",()=>{
+            music.play();
+        },{once:true});
+    });
+});
+</script>
+
+</body>
+</html>

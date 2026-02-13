@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Valentine 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    min-height:100vh;
+    text-align:center;
+    padding:20px;
+}
+
+/* ===== Gallery ===== */
+.gallery{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:40px;
+}
+
+.gallery img{
+    width:180px;
+    height:240px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    transition:0.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.08);
+}
+
+/* ===== Envelope ===== */
+.envelope{
+    width:160px;
+    height:110px;
+    margin:0 auto;
+    background:#fff;
+    position:relative;
+    border-radius:8px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.envelope:before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#ff4b5c;
+    clip-path:polygon(0 0, 50% 60%, 100% 0);
+}
+
+.open-btn{
+    margin-top:15px;
+    padding:8px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4b5c;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    display:none;
+}
+
+/* ===== Letter Box ===== */
+.letter{
+    max-width:500px;
+    margin:40px auto;
+    padding:25px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+    display:none;
+    position:relative;
+    animation:fadeIn 1s ease forwards;
+}
+
+.letter h2{
+    margin-bottom:15px;
+    color:#ff4b5c;
+}
+
+.letter p{
+    font-size:18px;
+    line-height:1.7;
+    color:#444;
+}
+
+/* Close Button */
+.close-btn{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:22px;
+    cursor:pointer;
+    color:#ff4b5c;
+    font-weight:bold;
+}
+
+.close-btn:hover{
+    transform:scale(1.2);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 style="color:white; margin-bottom:30px;">Our Beautiful Memories 💖</h1>
+
+<!-- Photos -->
+<div class="gallery">
+    <img src="v2.jpg">
+    <img src="v1.jpg">
+    <img src="v5.jpg">
+</div>
+
+<!-- Envelope -->
+<div class="envelope" id="envelope"></div>
+<button class="open-btn" id="openBtn">Open 💌</button>
+
+<!-- Letter -->
+<div class="letter" id="letter">
+    <div class="close-btn" id="closeBtn">✖</div>
+    <h2>To My Love 💖</h2>
+    <p>
+        ပုစိရေ Happy VDay ပါဝေ💕 
+        မောင် ချောကလက်ကအခြေအနေအရ မကျွေးဖြိုက်ဟာချေကို နားလည်ပေးပါ။
+        ပုစိချေဟာ မောင့်ဘဝအတွက်က မရှိမဖြစ်အရေးအပါဆုံးပါရာ။
+        ပုစိချေနဲ့ စတွဲတဲ့နေ့ကပင် ခုချိန်ထိ ပုစိအပေါ်ထားတဲ့ အချိုက်ကမပြောင်းလဲပါဝေ။
+        ဘဝအ‌ခြေပစောင်ပြောင်းပြောင်း ပုစိချေလက်ကိုဘဲ မြဲအောင် တွဲဖိုကတိပေးပါတယ်။
+        အားလုံးခါ ချိုက်ပါရေ အသက်ခဲချေ💕
+    </p>
+</div>
+
+<!-- Music -->
+<audio id="loveSong">
+    <source src="You Are The Reason - Calum Scott.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const envelope=document.getElementById("envelope");
+const openBtn=document.getElementById("openBtn");
+const letter=document.getElementById("letter");
+const closeBtn=document.getElementById("closeBtn");
+const loveSong=document.getElementById("loveSong");
+
+/* Envelope click */
+envelope.addEventListener("click",()=>{
+    openBtn.style.display="inline-block";
+});
+
+/* Open Letter */
+openBtn.addEventListener("click",()=>{
+    letter.style.display="block";
+    loveSong.play();
+});
+
+/* Close Letter */
+closeBtn.addEventListener("click",()=>{
+    letter.style.display="none";
+    loveSong.pause();
+    loveSong.currentTime=0;
+});
+</script>
+
+</body>
+</html>
